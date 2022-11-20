@@ -5,27 +5,27 @@ namespace Lb2
 {
     public class GameAccount
     {
-        public string UserName { get; }
+        private string UserName { get; }
         private int Rating { set; get; }
         private List<MatchResult> _userCareer = new List<MatchResult>();
 
         public GameAccount(string userName)
         {
+            Rating = 1;
             UserName = userName;
         }
-        public void WinGame(string opponentName, int matchRating)
+        public virtual void WinGame(Match match)
         {
-            Rating += matchRating;
-            _userCareer.Add(new MatchResult(SomeGame.MatchIndex, opponentName,matchRating,Status.Win));
+            Rating += match.GetMatchRating();
+            _userCareer.Add(new MatchResult(Match.MatchIndex,match.GetOpponent(this).UserName, match.GetMatchRating(),Status.Win));
         }
         
-        public void LoseGame(string opponentName, int matchRating)
+        public void LoseGame(Match match)
         {
-            Rating -= matchRating;
+            Rating -= match.GetMatchRating();
             if (Rating < 1) Rating = 1;
-            _userCareer.Add(new MatchResult(SomeGame.MatchIndex, opponentName,matchRating,Status.Lose));
+            _userCareer.Add(new MatchResult(Match.MatchIndex,match.GetOpponent(this).UserName, match.GetMatchRating(),Status.Lose));
         }
-
         public void GetStats()
         {
             Console.WriteLine("==========================================");

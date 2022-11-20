@@ -6,14 +6,14 @@
         {
             GameAccount p1 = new GameAccount("Kirgo");
             GameAccount p2 = new GameAccount("Solify");
-            SomeGame myGame = new SomeGame(p1, p2);
-            myGame.CreateMatch();
-            myGame.CreateMatch();
-            myGame.CreateMatch();
-            myGame.CreateMatch();
-            myGame.CreateMatch();
-            myGame.CreateMatch();
-            myGame.CreateMatch();
+            Game myGame = new Game(p1, p2);
+            myGame.StartWarmupMatch();
+            myGame.StartWarmupMatch();
+            myGame.StartWarmupMatch();
+            myGame.StartWarmupMatch();
+            myGame.StartRatedMatch();
+            myGame.StartWarmupMatch();
+            myGame.StartWarmupMatch();
             p1.GetStats();
             p2.GetStats();
         }
