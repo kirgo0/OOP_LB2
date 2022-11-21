@@ -9,11 +9,12 @@ namespace Lb2
 
         public override int GenerateMatchRating()
         {
-            return _random.Next(1, 25);
+            return Random.Next(10, 25);
         }
 
         public override void CreateMatch()
         {
+            MatchType = MatchType.Rated;
             MatchIndex++;
             MatchRating = GenerateMatchRating();
             if (MatchRating < 0) throw new Exception("Rating cannot be less then 0");

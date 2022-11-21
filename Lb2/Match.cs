@@ -4,15 +4,16 @@ namespace Lb2
 {
     public abstract class Match
     {
-        protected static Random _random = new Random();
-        public static int MatchIndex = _random.Next(0,100);
+        public MatchType MatchType { get; set; }
+        protected static Random Random = new Random();
+        public static int MatchIndex = Random.Next(0,100);
 
         protected int MatchRating { get; set; }
-        protected GameAccount _p1, _p2; 
+        protected GameAccount P1, P2; 
         public Match(GameAccount p1, GameAccount p2)
         {
-            _p1 = p1;
-            _p2 = p2;;
+            P1 = p1;
+            P2 = p2;;
         }
         public abstract int GenerateMatchRating();
 
@@ -24,21 +25,21 @@ namespace Lb2
         }
         public GameAccount GetOpponent(GameAccount player)
         {
-            if (player == _p1) return _p2;
-            return _p1;
+            if (player == P1) return P2;
+            return P1;
         }
 
-        public virtual void ChooseWinner()
+        protected virtual void ChooseWinner()
         {
-            if (_random.Next(0, 10) >= 5)
+            if (Random.Next(0, 10) >= 5)
             {
-                _p1.WinGame(this);
-                _p2.LoseGame(this);
+                P1.WinGame(this);
+                P2.LoseGame(this);
             }
             else
             {
-                _p2.WinGame(this);
-                _p1.LoseGame(this);
+                P2.WinGame(this);
+                P1.LoseGame(this);
             }
         }
         

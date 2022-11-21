@@ -24,5 +24,11 @@ namespace Lb2
             Match match = new RatedMatch(_p1,_p2);
             match.CreateMatch();
         }
+
+        public void StartSoloMatch(GameAccount p1)
+        {
+            Match match = new SoloMatch(p1);
+            match.CreateMatch();
+        }
     }
 }

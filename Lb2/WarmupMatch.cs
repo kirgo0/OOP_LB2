@@ -13,11 +13,10 @@ namespace Lb2
 
         public override void CreateMatch()
         {
+            MatchType = MatchType.Warmup;
             MatchIndex++;
             MatchRating = GenerateMatchRating();
-            // if (MatchRating < 0) throw new Exception("Rating cannot be less then 0");
-            _p1.WinGame(this);
-            _p2.WinGame(this);
+            ChooseWinner();
         }
     }
 }
