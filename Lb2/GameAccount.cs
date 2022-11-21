@@ -5,9 +5,9 @@ namespace Lb2
 {
     public class GameAccount
     {
-        private string UserName { get;  }
+        public string UserName { get;  }
         protected int Rating { set; get; }
-        protected List<MatchResult> UserCareer = new List<MatchResult>();
+        protected readonly List<MatchResult> UserCareer = new List<MatchResult>();
 
         public GameAccount(string userName)
         {

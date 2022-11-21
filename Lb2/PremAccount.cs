@@ -8,8 +8,8 @@ namespace Lb2
 
         public override void WinGame(Match match)
         {
-            Rating += match.GetMatchRating();
-            base.WinGame(match);
+            Rating += match.GetMatchRating() * 2;
+            UserCareer.Add(new MatchResult(match.MatchType, Match.MatchIndex,match.GetOpponent(this).UserName, match.GetMatchRating() * 2,Status.Win));
         }
 
         protected override void PrintMatchList()
@@ -22,7 +22,7 @@ namespace Lb2
                 Console.Write("Your opponent: " + matchResult.OpName); 
                 Console.Write(matchResult.PStatus == Status.Win ? 
                     " | Match Rating:" + (matchResult.MatchRating > 0 ? " (" : " ") + matchResult.MatchRating + 
-                    (matchResult.MatchRating > 0 ? ") x2 PREMIUM = " + matchResult.MatchRating*2 : "") + " | You Win" : 
+                    (matchResult.MatchRating > 0 ? ") x2 PREMIUM" : "") + " | You Win" : 
                     " | Match Rating: " + matchResult.MatchRating + " | You Lose") ;
                 Console.WriteLine();
             }

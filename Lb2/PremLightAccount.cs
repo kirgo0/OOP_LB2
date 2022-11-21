@@ -7,8 +7,9 @@ namespace Lb2
         public PremLightAccount(string userName) : base(userName) {}
         public override void WinGame(Match match)
         {
-            RatingHandler(match.GetMatchRating());
-            base.WinGame(match);
+            var bonus = RatingHandler(match.GetMatchRating());
+            Rating += match.GetMatchRating() + bonus;
+            UserCareer.Add(new MatchResult(match.MatchType, Match.MatchIndex,match.GetOpponent(this).UserName, match.GetMatchRating() + bonus,Status.Win));
         }
 
         private int RatingHandler(int rating)
@@ -28,10 +29,7 @@ namespace Lb2
             }
 
             if (multiplier > 0.7) multiplier = 0.7;
-            finalRating += Convert.ToInt32(rating * 0.25);
-            Console.WriteLine(finalRating);
-            finalRating += Convert.ToInt32(rating * multiplier);
-            Rating += finalRating;
+            finalRating += Convert.ToInt32(rating * 0.25) + Convert.ToInt32(rating * multiplier);
             return finalRating;
         }
         
@@ -45,7 +43,7 @@ namespace Lb2
                 Console.Write("Your opponent: " + matchResult.OpName); 
                 Console.Write(matchResult.PStatus == Status.Win ? 
                     " | Match Rating:" + (matchResult.MatchRating > 0 ? " (" : " ") + matchResult.MatchRating + 
-                    (matchResult.MatchRating > 0 ? ") LIGHT PREMIUM BONUS = " + RatingHandler(matchResult.MatchRating) : "") + " | You Win" : 
+                    (matchResult.MatchRating > 0 ? ") LIGHT PREMIUM BONUS" : "") + " | You Win" : 
                     " | Match Rating: " + matchResult.MatchRating + " | You Lose") ;
                 Console.WriteLine();
             }

@@ -4,31 +4,19 @@ namespace Lb2
 {
     public class Game
     {
-        
-        private GameAccount _p1, _p2;
-        
-        public Game(GameAccount p1, GameAccount p2)
+        public static Match StartWarmupMatch(GameAccount p1, GameAccount p2)
         {
-            _p1 = p1;
-            _p2 = p2;
+            return new WarmupMatch(p1, p2);
         }
 
-        public void StartWarmupMatch()
+        public static Match StartRatedMatch(GameAccount p1, GameAccount p2)
         {
-            Match match = new WarmupMatch(_p1,_p2);
-            match.CreateMatch();
+            return new RatedMatch(p1,p2);
         }
 
-        public void StartRatedMatch()
+        public static Match StartSoloMatch(GameAccount p1)
         {
-            Match match = new RatedMatch(_p1,_p2);
-            match.CreateMatch();
-        }
-
-        public void StartSoloMatch(GameAccount p1)
-        {
-            Match match = new SoloMatch(p1);
-            match.CreateMatch();
+            return new SoloMatch(p1);
         }
     }
 }
